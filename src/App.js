@@ -1,10 +1,7 @@
 import React from "react";
-import logo from "./logo.svg";
-import { Counter } from "./features/counter/Counter";
 import "./App.css";
 import Home from "./page/Home";
 import LoginPage from "./page/LoginPage";
-import { SignUp } from "./features/auth/components/SignUp";
 import SignUpPage from "./page/SignUpPage";
 import {
   createBrowserRouter,
@@ -12,6 +9,7 @@ import {
   Route,
   Link,
 } from "react-router-dom";
+import CartPage from "./page/CartPage";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +23,10 @@ const router = createBrowserRouter([
   {
     path: "SignUp",
     element: (<SignUpPage></SignUpPage>),
+  },
+  { 
+    path: "Cart",
+    element: (<CartPage></CartPage>),
   },
 ]);
 
