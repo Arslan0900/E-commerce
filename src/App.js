@@ -11,6 +11,7 @@ import {
 } from "react-router-dom";
 import CartPage from "./page/CartPage";
 import Checkout from "./page/Checkout";
+import Error404 from "./page/Error404";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
   { 
     path: "Checkout",
     element: (<Checkout></Checkout>),
+  },
+  { 
+    path: "*",
+    element: (<Error404></Error404>),
   },
 ]);
 
