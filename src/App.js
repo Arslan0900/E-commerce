@@ -3,15 +3,11 @@ import "./App.css";
 import Home from "./page/Home";
 import LoginPage from "./page/LoginPage";
 import SignUpPage from "./page/SignUpPage";
-import {
-  createBrowserRouter,
-  RouterProvider,
-  Route,
-  Link,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import CartPage from "./page/CartPage";
 import Checkout from "./page/Checkout";
 import Error404 from "./page/Error404";
+import ProductDetailPage from "./page/ProductDetailPage";
 
 const router = createBrowserRouter([
   {
@@ -33,6 +29,10 @@ const router = createBrowserRouter([
   { 
     path: "Checkout",
     element: (<Checkout></Checkout>),
+  },
+  { 
+    path: "product-detail",
+    element: (<ProductDetailPage></ProductDetailPage>),
   },
   { 
     path: "*",
