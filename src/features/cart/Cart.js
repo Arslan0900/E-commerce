@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, {  useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { increment, incrementAsync, selectCount } from "./cartSlice";
 import { Link } from "react-router-dom";
@@ -32,7 +32,7 @@ const products = [
 ];
 
 export function Cart() {
-  const [open, setOpen] = useState(true);
+  // const [open, setOpen] = useState(true);
   const count = useSelector(selectCount);
   const dispatch = useDispatch();
   return (
@@ -106,12 +106,12 @@ export function Cart() {
               Shipping and taxes calculated at checkout.
             </p>
             <div className="mt-6">
-              <a
-                href="#"
+              <Link
+                to="/checkout" 
                 className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
               >
                 Checkout
-              </a>
+              </Link>
             </div>
             <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
               <p>
@@ -120,7 +120,7 @@ export function Cart() {
                 <button
                   type="button"
                   className="font-medium text-indigo-600 hover:text-indigo-500"
-                  onClick={() => setOpen(false)}
+                  // onClick={() => setOpen(false)}
                 >
                   Continue Shopping
                   <span aria-hidden="true"> &rarr;</span>
