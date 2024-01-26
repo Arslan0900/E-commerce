@@ -8,35 +8,52 @@ import CartPage from "./page/CartPage";
 import Checkout from "./page/Checkout";
 import Error404 from "./page/Error404";
 import ProductDetailPage from "./page/ProductDetailPage";
+import Protected from "./features/auth/components/Protected";
 
 const router = createBrowserRouter([
   {
-    path: "/",
-    element: (<Home></Home>),
+    path: '/',
+    element: (
+      <Protected>
+        <Home></Home>
+      </Protected>
+    ),
   },
   {
-    path: "Login",
-    element: (<LoginPage></LoginPage>),
+    path: '/login',
+    element: <LoginPage></LoginPage>,
   },
   {
-    path: "SignUp",
-    element: (<SignUpPage></SignUpPage>),
+    path: '/signup',
+    element: <SignUpPage></SignUpPage>,
   },
-  { 
-    path: "Cart",
-    element: (<CartPage></CartPage>),
+  {
+    path: '/cart',
+    element: (
+      <Protected>
+        <CartPage></CartPage>
+      </Protected>
+    ),
   },
-  { 
-    path: "Checkout",
-    element: (<Checkout></Checkout>),
+  {
+    path: '/checkout',
+    element: (
+      <Protected>
+        <Checkout></Checkout>
+      </Protected>
+    ),
   },
-  { 
-    path: "product-detail/:id",
-    element: (<ProductDetailPage></ProductDetailPage>),
+  {
+    path: '/product-detail/:id',
+    element: (
+      <Protected>
+        <ProductDetailPage></ProductDetailPage>
+      </Protected>
+    ),
   },
-  { 
-    path: "*",
-    element: (<Error404></Error404>),
+  {
+    path: '*',
+    element: <Error404></Error404>,
   },
 ]);
 
