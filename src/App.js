@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./App.css";
 import Home from "./page/Home";
 import LoginPage from "./page/LoginPage";
@@ -9,10 +9,13 @@ import Checkout from "./page/Checkout";
 import Error404 from "./page/Error404";
 import ProductDetailPage from "./page/ProductDetailPage";
 import Protected from "./features/auth/components/Protected";
+import { fetchItemsByUserIdAsync } from "./features/cart/cartSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { selectLoggedInUser } from "./features/auth/authSlice";
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: (
       <Protected>
         <Home></Home>
@@ -20,15 +23,15 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: '/login',
+    path: "/login",
     element: <LoginPage></LoginPage>,
   },
   {
-    path: '/signup',
+    path: "/signup",
     element: <SignUpPage></SignUpPage>,
   },
   {
-    path: '/cart',
+    path: "/cart",
     element: (
       <Protected>
         <CartPage></CartPage>
@@ -36,7 +39,7 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: '/checkout',
+    path: "/checkout",
     element: (
       <Protected>
         <Checkout></Checkout>
@@ -44,7 +47,7 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: '/product-detail/:id',
+    path: "/product-detail/:id",
     element: (
       <Protected>
         <ProductDetailPage></ProductDetailPage>
@@ -52,12 +55,20 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: '*',
+    path: "*",
     element: <Error404></Error404>,
   },
 ]);
 
 function App() {
+  const dispatch = useDispatch();
+  const user = useSelector(selectLoggedInUser);
+
+  useEffect(() => {
+    if (user) {
+      dispatch(fetchItemsByUserIdAsync(user.id));
+    }
+  }, [dispatch, user]);
   return (
     <div className="App">
       <RouterProvider router={router} />
