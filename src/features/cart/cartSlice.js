@@ -11,7 +11,7 @@ export const addToCartAsync = createAsyncThunk(
   async (item) => {
     const response = await addToCart(item);
     // The value we return becomes the `fulfilled` action payload
-    console.log(response.data)
+    // console.log(response.data)
     return response.data;
   }
 );
@@ -30,6 +30,7 @@ export const updateCartAsync = createAsyncThunk(
   async (update) => {
     const response = await updateCart(update);
     // The value we return becomes the `fulfilled` action payload
+    console.log(response)
     return response.data;
   }
 );
