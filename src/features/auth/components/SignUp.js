@@ -6,7 +6,7 @@ import { selectLoggedInUser, createUserAsync } from '../authSlice';
 import { Link } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
 
-export default function SignUp() {
+export default function Signup() {
   const dispatch = useDispatch();
   const user = useSelector(selectLoggedInUser);
 
@@ -20,7 +20,6 @@ export default function SignUp() {
 
   return (
     <>
-    {user?.email}
       {user && <Navigate to="/" replace={true}></Navigate>}
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -40,7 +39,7 @@ export default function SignUp() {
             className="space-y-6"
             onSubmit={handleSubmit((data) => {
               dispatch(
-                createUserAsync({ email: data.email, password: data.password,address:[] })
+                createUserAsync({ email: data.email, password: data.password, addresses:[] })
               );
               console.log(data);
             })}
@@ -58,7 +57,7 @@ export default function SignUp() {
                   {...register('email', {
                     required: 'email is required',
                     pattern: {
-                      value: /\b[\w-]+@[\w-]+\.\w{2,4}\b/gi,
+                      value: /\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/gi,
                       message: 'email not valid',
                     },
                   })}
@@ -80,12 +79,12 @@ export default function SignUp() {
                   Password
                 </label>
                 <div className="text-sm">
-                  {/* <a
+                  <a
                     href="#"
                     className="font-semibold text-indigo-600 hover:text-indigo-500"
                   >
                     Forgot password?
-                  </a> */}
+                  </a>
                 </div>
               </div>
               <div className="mt-2">

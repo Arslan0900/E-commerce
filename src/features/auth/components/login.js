@@ -5,7 +5,7 @@ import { Link, Navigate } from 'react-router-dom';
 import { checkUserAsync } from '../authSlice';
 import { useForm } from 'react-hook-form';
 
-export  function Login() {
+export default function Login() {
   const dispatch = useDispatch();
   const error = useSelector(selectError)
   const user = useSelector(selectLoggedInUser)
@@ -15,7 +15,7 @@ export  function Login() {
     formState: { errors },
   } = useForm();
 
-  // console.log(errors);
+  console.log(errors);
 
   return (
     <>
@@ -41,8 +41,7 @@ export  function Login() {
               );
             })}
             className="space-y-6"
-            action="#"
-            method="POST"
+    
           >
             <div>
               <label
@@ -74,7 +73,6 @@ export  function Login() {
               <div className="flex items-center justify-between">
                 <label
                   htmlFor="password"
-                  autoCapitalize='on'
                   className="block text-sm font-medium leading-6 text-gray-900"
                 >
                   Password

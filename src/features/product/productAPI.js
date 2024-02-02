@@ -7,6 +7,7 @@ export function fetchAllProducts() {
   }
   );
 }
+
 export function fetchProductById(id) {
   return new Promise(async (resolve) =>{
     //TODO: we will not hard-code server URL here
@@ -33,7 +34,7 @@ export function fetchProductsByFilters(filter,sort,pagination) {
   for(let key in sort){
     queryString += `${key}=${sort[key]}&`
   }
-  // console.log(pagination)
+  console.log(pagination)
   for(let key in pagination){
     queryString += `${key}=${pagination[key]}&`
   }
@@ -49,6 +50,7 @@ export function fetchProductsByFilters(filter,sort,pagination) {
   );
 }
 
+
 export function fetchCategories() {
   return new Promise(async (resolve) =>{
     const response = await fetch('http://localhost:8080/categories') 
@@ -57,6 +59,7 @@ export function fetchCategories() {
   }
   );
 }
+
 export function fetchBrands() {
   return new Promise(async (resolve) =>{
     const response = await fetch('http://localhost:8080/brands') 

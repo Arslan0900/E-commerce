@@ -1,20 +1,31 @@
-import React, { useEffect } from "react";
+import { Counter } from "./features/counter/Counter";
 import "./App.css";
-import Home from "./page/Home";
-import LoginPage from "./page/LoginPage";
-import SignUpPage from "./page/SignUpPage";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import CartPage from "./page/CartPage";
-import Checkout from "./page/Checkout";
-import Error404 from "./page/Error404";
-import ProductDetailPage from "./page/ProductDetailPage";
+import Home from "./pages/Home";
+import LoginPage from "./pages/LoginPage";
+import SignupPage from "./pages/SignupPage";
+
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Route,
+  Link,
+} from "react-router-dom";
+import Cart from "./features/cart/Cart";
+import CartPage from "./pages/CartPage";
+import Checkout from "./pages/Checkout";
+import ProductDetailPage from "./pages/ProductDetailPage";
 import Protected from "./features/auth/components/Protected";
-import { fetchItemsByUserIdAsync } from "./features/cart/cartSlice";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectLoggedInUser } from "./features/auth/authSlice";
-import OrderSuccessPage from "./page/OrderSuccessPage";
-import UserOrderPage from "./page/UserOrderPage";
-
+import { fetchItemsByUserIdAsync } from "./features/cart/cartSlice";
+import PageNotFound from "./pages/404";
+import OrderSuccessPage from "./pages/OrderSuccessPage";
+import UserOrders from "./features/user/components/UserOrders";
+import UserOrdersPage from "./pages/UserOrdersPage";
+import UserProfile from "./features/user/components/UserProfile";
+import UserProfilePage from "./pages/UserProfilePage";
+import { fetchLoggedInUserAsync } from "./features/user/userSlice";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -30,7 +41,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/signup",
-    element: <SignUpPage></SignUpPage>,
+    element: <SignupPage></SignupPage>,
   },
   {
     path: "/cart",
@@ -62,11 +73,15 @@ const router = createBrowserRouter([
   },
   {
     path: "/orders",
-    element: <UserOrderPage></UserOrderPage>
+    element: <UserOrdersPage></UserOrdersPage>,
+  },
+  {
+    path: "/profile",
+    element: <UserProfilePage></UserProfilePage>,
   },
   {
     path: "*",
-    element: <Error404></Error404>,
+    element: <PageNotFound></PageNotFound>,
   },
 ]);
 
@@ -77,8 +92,10 @@ function App() {
   useEffect(() => {
     if (user) {
       dispatch(fetchItemsByUserIdAsync(user.id));
+      dispatch(fetchLoggedInUserAsync(user.id));
     }
   }, [dispatch, user]);
+
   return (
     <div className="App">
       <RouterProvider router={router} />
